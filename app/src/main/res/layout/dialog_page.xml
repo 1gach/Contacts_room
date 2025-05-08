@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dp"
+    android:background="@color/blue"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:id="@+id/enterFirstName"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="Enter Firt name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/enterLastName"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:hint="Enter last name"
+        app:layout_constraintTop_toBottomOf="@id/enterFirstName"/>
+
+    <EditText
+        android:id="@+id/enterNumber"
+        android:layout_width="130dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/purple"
+        android:hint="Enter phone number"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/enterLastName" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="85dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Add contact"
+        android:textColor="@color/sky"
+        android:textSize="8sp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/enterNumber"
+        app:layout_constraintStart_toStartOf="@+id/enterNumber"
+        app:layout_constraintTop_toBottomOf="@+id/enterNumber" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
