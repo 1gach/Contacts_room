@@ -31,12 +31,22 @@ class ContactViewModel(private val dao: ContactDao): ViewModel() {
 
      fun  onEvent(event: ContactEvent) {
          when (event) {
-             ContactEvent.SaveContact ->{val firstName = state.value.firstName
+             ContactEvent.SaveContact ->{
+                 val firstName = state.value.firstName
              val lastName = state.value.lastName
              val phoneNumber = state.value.phoneNumber
-                 if (firstName.isBlank()||lastName.isBlank() ||phoneNumber.isBlank()){
-                      return
+                 if (firstName.isBlank() || lastName.isBlank() || phoneNumber.isBlank()) {
+                     _state.update {
+                         it.copy(
+                             highlightFirstName = firstName.isBlank(),
+                             highlightLastName = lastName.isBlank(),
+                             highlightPhoneNumber = phoneNumber.isBlank()
+                         )
+                     }
+                     return
                  }
+
+
                  val contact = Contact(firstname = firstName, lastname = lastName, number =  phoneNumber)
                  viewModelScope.launch {
                      dao.upsertContact(contact)
@@ -45,7 +55,10 @@ class ContactViewModel(private val dao: ContactDao): ViewModel() {
                      isAddingContact = false,
                      firstName = "",
                      lastName = "",
-                     phoneNumber = ""
+                     phoneNumber = "",
+                     highlightFirstName = false,
+                     highlightLastName = false,
+                     highlightPhoneNumber = false
                  ) }
              }
              is ContactEvent.SetFirstName -> _state.update { it.copy(firstName = event.firstName )}

@@ -20,10 +20,10 @@ interface ContactDao {
 
     @Delete
     suspend fun deleteContact(contact: Contact)
-    @Query("SELECT * FROM Contact ORDER BY lastname ASC")
+    @Query("SELECT * FROM Contact ORDER BY  LOWER(lastname ) ASC")
      fun getContactOrderedByLastname(): Flow<List<Contact>>
 
-    @Query("SELECT * FROM Contact ORDER BY firstname ASC")
+    @Query("SELECT * FROM Contact ORDER BY LOWER(firstname) ASC")
      fun getContactOrderedByFirstname(): Flow<List<Contact>>
 
     @Query("SELECT * FROM Contact ORDER BY number ASC")

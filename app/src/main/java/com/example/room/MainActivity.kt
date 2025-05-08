@@ -1,7 +1,9 @@
 package com.example.room
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -130,9 +132,26 @@ class MainActivity : AppCompatActivity() {
                 .setCancelable(true)
                 .create()
 
+            lifecycleScope.launch {
+                viewModel.state.collect { state ->
+                    dialogBinding.enterFirstName.setHintTextColor(
+                        if (state.highlightFirstName) Color.RED else Color.BLACK
+                    )
+                    dialogBinding.enterLastName.setHintTextColor(
+                        if (state.highlightLastName) Color.RED else Color.BLACK
+                    )
+                    dialogBinding.enterNumber.setHintTextColor(
+                        if (state.highlightPhoneNumber) Color.RED else Color.BLACK
+                    )
+                }
+            }
+
+
+
 //
             dialogBinding.enterFirstName.addTextChangedListener {
-                viewModel.onEvent(ContactEvent.SetFirstName(it?.toString() ?: ""))
+                    viewModel.onEvent(ContactEvent.SetFirstName(it?.toString() ?: ""))
+
             }
 
             dialogBinding.enterLastName.addTextChangedListener {
@@ -146,13 +165,21 @@ class MainActivity : AppCompatActivity() {
 
 
             dialogBinding.addBtn.setOnClickListener {
+                val currentState = viewModel.state.value
+                dialogBinding.enterNumber.inputType = InputType.TYPE_CLASS_NUMBER
+
                 viewModel.onEvent(ContactEvent.SaveContact)
+
+                if (currentState.firstName.isBlank() || currentState.lastName.isBlank() || currentState.phoneNumber.isBlank()) {
+                    return@setOnClickListener
+
+            }
                 dialog.dismiss()
+
             }
             dialog.show()
 
             }
-//
 
 
         }

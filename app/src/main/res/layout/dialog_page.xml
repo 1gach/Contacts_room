@@ -41,6 +41,7 @@
         android:background="@color/purple"
         android:hint="Enter phone number"
         android:textSize="12sp"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
